@@ -8,12 +8,14 @@ function List(datas, removeItem, changeItem) {
   const counter = new Counter(datas);
 
   const buttonAllRemove = createElement("button", "allRemove-btn");
+  buttonAllRemove.classList.add("button-v1");
   buttonAllRemove.textContent = "전체 삭제";
   buttonAllRemove.addEventListener("click", () => {
     changeItem("", "전체 삭제");
   });
 
   const buttonAllTrue = createElement("button", "allTrue-btn");
+  buttonAllTrue.classList.add("button-v1");
   buttonAllTrue.textContent = "전체 완료";
   buttonAllTrue.addEventListener("click", () => {
     changeItem("", "전체 완료");

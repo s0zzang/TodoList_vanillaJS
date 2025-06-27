@@ -11,6 +11,7 @@ function Form(addItem) {
   input.autofocus = true;
 
   const button = createElement("button", "add-btn");
+  button.classList.add("button-v1");
   button.textContent = "추가";
 
   form.append(input, button);

@@ -1,6 +1,5 @@
 .todo-main {
   background: #fff;
-  border-top: 1px solid var(--color-gray);
   padding: var(--layout-medium);
   padding-bottom: var(--layout-big);
   border-radius: 0 0 var(--border-radius) var(--border-radius);
@@ -23,20 +22,19 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: var(--size-small);
-  transition: opacity var(--transition-duration);
-
+  transition: background var(--transition-duration);
   background: #f2f2f2;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 10px;
+  border: 2px solid #f2f2f2;
 }
 
-.todo-subject {
+.todo-title {
   position: relative;
   cursor: pointer;
 }
 
-.todo-subject::after {
+.todo-title::after {
   content: "";
   display: block;
   position: absolute;
@@ -49,10 +47,26 @@
 }
 
 .todo-item.is-completed {
-  opacity: 0.4;
+  background: #fff;
   /* backdrop-filter: ; */
 }
 
-.todo-item.is-completed .todo-subject::after {
+.todo-item.is-completed .todo-title {
+  opacity: 0.6;
+}
+.todo-item.is-completed .todo-title::after {
   width: 100%;
+}
+
+.delete-btn {
+  /* background: url(/assets/img/icon-delete.svg) no-repeat center; */
+}
+
+.delete-btn::after {
+  content: "";
+  display: block;
+  position: relative;
+  width: 20px;
+  aspect-ratio: 1/1;
+  background: url(/assets/img/icon-delete.svg) no-repeat center / 100%;
 }

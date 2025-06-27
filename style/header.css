@@ -1,6 +1,6 @@
 .todo-header {
   background: #fff;
-  padding: var(--layout-big) var(--layout-medium) calc(var(--layout-big) * 1.5);
+  padding: var(--layout-big) var(--layout-medium) var(--layout-medium);
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   position: relative;
   overflow: hidden;
@@ -20,12 +20,12 @@
   transform: translate(30%, -30%);
 }
 
-.todo-title {
+.todo-header-title {
   font-size: var(--size-big);
   font-weight: bold;
 }
 
-.todo-subTitle {
+.todo-header-subTitle {
   margin-top: 8px;
   margin-left: 2px;
   opacity: 0.6;

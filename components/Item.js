@@ -8,17 +8,19 @@ function Item({ name, isCompleted }, idx, removeItem, changeItem) {
   input.setAttribute("id", name);
   input.type = "checkbox";
 
-  const span = createElement("span", "todo-subject");
+  const span = createElement("span", "todo-title");
   span.textContent = name;
 
   const button = createElement("button", "delete-btn");
+  const hiddenText = createElement("span", "hidden");
   button.type = "button";
-  button.textContent = "삭제";
+  hiddenText.textContent = "삭제";
+  button.append(hiddenText);
 
   li.append(input, span, button);
   li.addEventListener("click", (e) => {
     const target = e.target.className;
-    if (target === "todo-subject") {
+    if (target === "todo-title") {
       li.classList.toggle("is-completed");
       changeItem(idx);
     }
