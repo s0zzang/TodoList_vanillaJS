@@ -1,0 +1,43 @@
+.todo-footer {
+  flex-shrink: 0;
+  background: var(--color-primary);
+  padding: var(--layout-medium);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  position: relative;
+}
+
+.todo-footer::before,
+.todo-footer::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: calc(var(--border-radius) * -1);
+  left: 0;
+  width: var(--border-radius);
+  aspect-ratio: 1/1;
+  background: var(--color-primary);
+  z-index: -1;
+}
+
+.todo-footer::after {
+  left: auto;
+  right: 0;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-input {
+  width: 100%;
+  height: var(--layout-big);
+  border-radius: 10px;
+  border: none;
+  text-indent: 10px;
+  font-size: var(--size-small);
+}
+
+.add-btn {
+  flex-shrink: 0;
+}

@@ -1,0 +1,48 @@
+.todo-header {
+  background: #fff;
+  padding: var(--layout-big) var(--layout-medium) calc(var(--layout-big) * 1.5);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.todo-header::after {
+  content: "";
+  position: absolute;
+  display: block;
+  /* background: var(--color-third); */
+  width: 70px;
+  aspect-ratio: 1 / 1;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  filter: blur(50px);
+  transform: translate(30%, -30%);
+}
+
+.todo-title {
+  font-size: var(--size-big);
+  font-weight: bold;
+}
+
+.todo-subTitle {
+  margin-top: 8px;
+  margin-left: 2px;
+  opacity: 0.6;
+}
+
+.todo-title-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.todo-circle {
+  margin-left: auto;
+  font-size: var(--size-small);
+  color: var(--color-primary);
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  background: #fff;
+  padding: 4px 10px 3px;
+}
