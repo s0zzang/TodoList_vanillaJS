@@ -26,11 +26,11 @@ function App() {
 
   this.addItem = (newItem) => {
     const newData = [
+      ...this.data,
       {
         name: newItem,
         isCompleted: false,
       },
-      ...this.data,
     ];
     this.setState(newData);
   };
