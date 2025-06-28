@@ -63,6 +63,7 @@ function App() {
 
   this.deleteItem = (index) => {
     const newTodo = this.todo.filter((_, i) => i !== index);
+    this.checkedReset();
     this.setTodoState(newTodo);
   };
 
