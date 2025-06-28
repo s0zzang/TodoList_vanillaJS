@@ -31,7 +31,10 @@ function List(datas, handlers, inputState) {
     ul.append(new Item(item, idx, handlers, inputState))
   );
 
-  return section;
+  const noData = createElement("h3", "noData");
+  noData.innerHTML = `아직 등록된 할 일이 없어요.<br>오늘 해야 할 일을 작성해보세요!`;
+
+  return datas.length ? section : noData;
 }
 
 export default List;
