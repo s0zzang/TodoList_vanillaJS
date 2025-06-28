@@ -1,14 +1,18 @@
 import { createElement } from "../utils/createElement.js";
 
-function Form(addItem) {
+function Form(handlers, inputState) {
+  const { addItem, editItem } = handlers;
+  const { targetValue, targetIndex, targetComplited } = inputState;
+
   const form = createElement("form", "todo-form");
   form.action = "";
 
   const input = createElement("input");
   input.type = "text";
   input.name = "addInput";
+  input.value = targetValue;
+  input.readOnly = targetComplited;
   input.placeholder = "할 일을 입력하세요.";
-  input.autofocus = true;
 
   const button = createElement("button", "add-btn");
   button.classList.add("button-v1");
@@ -18,10 +22,14 @@ function Form(addItem) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const input = e.target.addInput;
-    // if (!input) return;
-    addItem(input.value.trim());
-    input.value = "";
+    const value = input.value.trim();
+    if (!value) return;
+    if (targetValue) editItem(value, targetIndex);
+    else addItem(value);
   });
+
+  // input focus
+  if (!targetComplited) setTimeout(() => input.focus(), 0);
 
   return form;
 }
