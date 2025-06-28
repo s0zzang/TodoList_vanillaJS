@@ -87,3 +87,21 @@ input[type="text"]:read-only {
   overflow: hidden;
   clip: rect(1px 1px 1px 1px);
 }
+
+.noData {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.noData::before {
+  content: "";
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/1;
+  background: url(/assets/img/icon-keyboard.svg) no-repeat center / 100px;
+}
