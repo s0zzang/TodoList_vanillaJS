@@ -1,9 +1,11 @@
 import { createElement } from "../utils/createElement.js";
 
-function Item(data, idx, handlers, inputState) {
+function Item(data, idx, handlers) {
   const { name, isCompleted } = data;
-  const { deleteItem, toggleItem, prepareEditItem } = handlers;
-  const { targetIndex, targetValue } = inputState;
+  const {
+    todos: { deleteItem, toggleItem, prepareEditItem },
+    checked,
+  } = handlers;
 
   const li = createElement("li", "todo-item");
   if (isCompleted) li.classList.add("is-completed");
@@ -11,9 +13,10 @@ function Item(data, idx, handlers, inputState) {
   const input = createElement("input", "todo-check");
   input.id = idx;
   input.type = "checkbox";
-  input.checked = idx === targetIndex && name === targetValue;
+  input.checked = idx === checked.get.index && name === checked.get.value;
   input.addEventListener("change", (e) => {
     if (e.target.checked) prepareEditItem(idx, name, isCompleted);
+    else checked.reset();
   });
 
   const title = createElement("h3", "todo-title");

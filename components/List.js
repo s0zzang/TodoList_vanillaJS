@@ -2,8 +2,10 @@ import { createElement } from "../utils/createElement.js";
 import Counter from "./Counter.js";
 import Item from "./Item.js";
 
-function List(datas, handlers, inputState) {
-  const { deleteAllItems, completeAllItems } = handlers;
+function List(datas, handlers) {
+  const {
+    todos: { deleteAllItems, completeAllItems },
+  } = handlers;
   const section = createElement("section", "todo-content");
   const header = createElement("header", "todo-list-header");
 
@@ -27,9 +29,7 @@ function List(datas, handlers, inputState) {
 
   const ul = createElement("ul", "todo-list");
   section.append(header, ul);
-  datas.map((item, idx) =>
-    ul.append(new Item(item, idx, handlers, inputState))
-  );
+  datas.map((item, idx) => ul.append(new Item(item, idx, handlers)));
 
   const noData = createElement("h3", "noData");
   noData.innerHTML = `아직 등록된 할 일이 없어요.<br>오늘 해야 할 일을 작성해보세요!`;

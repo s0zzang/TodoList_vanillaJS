@@ -8,8 +8,8 @@ function App() {
   this.$app = document.querySelector("#app");
 
   this.init = () => {
-    this.list = new List(this.todo, this.handlers, this.inputState);
-    this.form = new Form(this.handlers, this.inputState);
+    this.list = new List(this.todo, this.handlers);
+    this.form = new Form(this.handlers);
     this.layout = new Layout(this.$app, this.list, this.form);
   };
 
@@ -25,20 +25,29 @@ function App() {
     this.render();
   };
 
-  this.inputState = {
-    targetValue: null,
-    targetIndex: null,
-    targetcompleted: false,
-    set: function (value, index, isCompleted) {
-      this.targetValue = value;
-      this.targetIndex = index;
-      this.targetcompleted = isCompleted;
-    },
-    reset: function () {
-      this.targetValue = null;
-      this.targetIndex = null;
-      this.targetcompleted = false;
-    },
+  this.checkedState = {
+    value: null,
+    index: null,
+    completed: false,
+  };
+
+  this.checkedSet = (value, index, isCompleted) => {
+    this.checkedState.value = value;
+    this.checkedState.index = index;
+    this.checkedState.completed = isCompleted;
+  };
+
+  this.checkedReset = () => {
+    this.checkedState.value = null;
+    this.checkedState.index = null;
+    this.checkedState.completed = false;
+    this.render();
+  };
+
+  this.checkedHandler = {
+    get: this.checkedState,
+    set: this.checkedSet,
+    reset: this.checkedReset,
   };
 
   this.addItem = (newItem) => {
@@ -67,7 +76,7 @@ function App() {
   };
 
   this.prepareEditItem = (idx, name, isCompleted) => {
-    this.inputState.set(name, idx, isCompleted);
+    this.checkedSet(name, idx, isCompleted);
     this.render();
   };
 
@@ -76,7 +85,7 @@ function App() {
       if (idx !== index) return item;
       return { ...item, name };
     });
-    this.inputState.reset();
+    this.checkedReset();
     this.setTodoState(newTodo);
   };
 
@@ -89,7 +98,7 @@ function App() {
     this.setTodoState([]);
   };
 
-  this.handlers = {
+  this.todosHandlers = {
     addItem: this.addItem,
     deleteItem: this.deleteItem,
     toggleItem: this.toggleItem,
@@ -97,6 +106,11 @@ function App() {
     editItem: this.editItem,
     completeAllItems: this.completeAllItems,
     deleteAllItems: this.deleteAllItems,
+  };
+
+  this.handlers = {
+    todos: this.todosHandlers,
+    checked: this.checkedHandler,
   };
 
   this.init();

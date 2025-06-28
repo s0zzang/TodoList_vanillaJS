@@ -1,8 +1,10 @@
 import { createElement } from "../utils/createElement.js";
 
-function Form(handlers, inputState) {
-  const { addItem, editItem } = handlers;
-  const { targetValue, targetIndex, targetcompleted } = inputState;
+function Form(handlers) {
+  const {
+    todos: { addItem, editItem },
+    checked,
+  } = handlers;
 
   const form = createElement("form", "todo-form");
   form.action = "";
@@ -10,8 +12,8 @@ function Form(handlers, inputState) {
   const input = createElement("input");
   input.type = "text";
   input.name = "addInput";
-  input.value = targetValue;
-  input.readOnly = targetcompleted;
+  input.value = checked.get.value;
+  input.readOnly = checked.get.completed;
   input.placeholder = "할 일을 입력하세요.";
 
   const button = createElement("button", "add-btn");
@@ -29,7 +31,7 @@ function Form(handlers, inputState) {
   });
 
   // input focus
-  if (!targetcompleted) setTimeout(() => input.focus(), 0);
+  if (!checked.get.completed) setTimeout(() => input.focus(), 0);
 
   return form;
 }
