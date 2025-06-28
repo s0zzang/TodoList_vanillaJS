@@ -63,7 +63,7 @@ function App() {
       if (idx !== index) return item;
       return { ...item, isCompleted: !item.isCompleted };
     });
-    this.setTodoState(newTodo);
+    setTimeout(() => this.setTodoState(newTodo), 500);
   };
 
   this.prepareEditItem = (idx, name, isCompleted) => {
