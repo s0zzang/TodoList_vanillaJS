@@ -2,30 +2,33 @@ import { createElement } from "../utils/createElement.js";
 import Counter from "./Counter.js";
 import Item from "./Item.js";
 
-function List(datas, removeItem, changeItem) {
+function List(datas, handlers, inputState) {
+  const { removeAllItems, completeAllItems } = handlers;
   const section = createElement("section", "todo-content");
   const header = createElement("header", "todo-list-header");
   const counter = new Counter(datas);
 
-  const buttonAllRemove = createElement("button", "allRemove-btn");
-  buttonAllRemove.classList.add("button-v1");
-  buttonAllRemove.textContent = "전체 삭제";
-  buttonAllRemove.addEventListener("click", () => {
-    changeItem("", "전체 삭제");
-  });
+  const removeAllBtn = createElement("button", "button-v1");
+  removeAllBtn.id = "REMOVE_ALL";
+  removeAllBtn.type = "button";
+  removeAllBtn.textContent = "전체 삭제";
 
-  const buttonAllTrue = createElement("button", "allTrue-btn");
-  buttonAllTrue.classList.add("button-v1");
-  buttonAllTrue.textContent = "전체 완료";
-  buttonAllTrue.addEventListener("click", () => {
-    changeItem("", "전체 완료");
+  const completeAllBtn = createElement("button", "button-v1");
+  completeAllBtn.id = "COMPLETE_ALL";
+  completeAllBtn.type = "button";
+  completeAllBtn.textContent = "전체 완료";
+
+  header.append(counter, removeAllBtn, completeAllBtn);
+  header.addEventListener("click", (e) => {
+    const target = e.target.id;
+    if (target === "REMOVE_ALL") removeAllItems();
+    if (target === "COMPLETE_ALL") completeAllItems();
   });
-  header.append(counter, buttonAllRemove, buttonAllTrue);
 
   const ul = createElement("ul", "todo-list");
   section.append(header, ul);
   datas.map((item, idx) =>
-    ul.append(new Item(item, idx, removeItem, changeItem))
+    ul.append(new Item(item, idx, handlers, inputState))
   );
 
   return section;
