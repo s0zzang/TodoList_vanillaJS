@@ -6,7 +6,6 @@ function List(datas, handlers, inputState) {
   const { deleteAllItems, completeAllItems } = handlers;
   const section = createElement("section", "todo-content");
   const header = createElement("header", "todo-list-header");
-  const counter = new Counter(datas);
 
   const deleteAllBtn = createElement("button", "button-v1");
   deleteAllBtn.id = "delete_ALL";
@@ -18,7 +17,8 @@ function List(datas, handlers, inputState) {
   completeAllBtn.type = "button";
   completeAllBtn.textContent = "전체 완료";
 
-  header.append(counter, deleteAllBtn, completeAllBtn);
+  const counter = new Counter(datas);
+  header.append(deleteAllBtn, completeAllBtn, counter);
   header.addEventListener("click", (e) => {
     const target = e.target.id;
     if (target === "delete_ALL") deleteAllItems();
