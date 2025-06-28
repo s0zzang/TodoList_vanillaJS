@@ -3,25 +3,25 @@ import Counter from "./Counter.js";
 import Item from "./Item.js";
 
 function List(datas, handlers, inputState) {
-  const { removeAllItems, completeAllItems } = handlers;
+  const { deleteAllItems, completeAllItems } = handlers;
   const section = createElement("section", "todo-content");
   const header = createElement("header", "todo-list-header");
   const counter = new Counter(datas);
 
-  const removeAllBtn = createElement("button", "button-v1");
-  removeAllBtn.id = "REMOVE_ALL";
-  removeAllBtn.type = "button";
-  removeAllBtn.textContent = "전체 삭제";
+  const deleteAllBtn = createElement("button", "button-v1");
+  deleteAllBtn.id = "delete_ALL";
+  deleteAllBtn.type = "button";
+  deleteAllBtn.textContent = "전체 삭제";
 
   const completeAllBtn = createElement("button", "button-v1");
   completeAllBtn.id = "COMPLETE_ALL";
   completeAllBtn.type = "button";
   completeAllBtn.textContent = "전체 완료";
 
-  header.append(counter, removeAllBtn, completeAllBtn);
+  header.append(counter, deleteAllBtn, completeAllBtn);
   header.addEventListener("click", (e) => {
     const target = e.target.id;
-    if (target === "REMOVE_ALL") removeAllItems();
+    if (target === "delete_ALL") deleteAllItems();
     if (target === "COMPLETE_ALL") completeAllItems();
   });
 

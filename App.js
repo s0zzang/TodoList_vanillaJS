@@ -52,7 +52,7 @@ function App() {
     this.setTodoState(newTodo);
   };
 
-  this.removeItem = (index) => {
+  this.deleteItem = (index) => {
     const newTodo = this.todo.filter((_, i) => i !== index);
     this.setTodoState(newTodo);
   };
@@ -85,18 +85,18 @@ function App() {
     this.setTodoState(newTodo);
   };
 
-  this.removeAllItems = () => {
+  this.deleteAllItems = () => {
     this.setTodoState([]);
   };
 
   this.handlers = {
     addItem: this.addItem,
-    removeItem: this.removeItem,
+    deleteItem: this.deleteItem,
     toggleItem: this.toggleItem,
     prepareEditItem: this.prepareEditItem,
     editItem: this.editItem,
     completeAllItems: this.completeAllItems,
-    removeAllItems: this.removeAllItems,
+    deleteAllItems: this.deleteAllItems,
   };
 
   this.init();

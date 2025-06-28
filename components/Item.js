@@ -2,7 +2,7 @@ import { createElement } from "../utils/createElement.js";
 
 function Item(data, idx, handlers, inputState) {
   const { name, isCompleted } = data;
-  const { removeItem, toggleItem, prepareEditItem } = handlers;
+  const { deleteItem, toggleItem, prepareEditItem } = handlers;
   const { targetIndex, targetValue } = inputState;
 
   const li = createElement("li", "todo-item");
@@ -29,7 +29,7 @@ function Item(data, idx, handlers, inputState) {
   li.addEventListener("click", (e) => {
     const target = e.target.className;
     if (target === "todo-title") toggleItem(li, idx);
-    if (target === "delete-btn") removeItem(idx);
+    if (target === "delete-btn") deleteItem(idx);
   });
 
   return li;
