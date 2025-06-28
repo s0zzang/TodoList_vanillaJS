@@ -4,12 +4,12 @@ import List from "./components/List.js";
 import { getStorage, setStorage } from "./utils/storage.js";
 
 function App() {
-  this.data = getStorage();
+  this.todo = getStorage();
   this.$app = document.querySelector("#app");
 
   this.init = () => {
-    this.list = new List(this.data, this.removeItem, this.changeItem);
-    this.form = new Form(this.addItem);
+    this.list = new List(this.todo, this.handlers, this.inputState);
+    this.form = new Form(this.handlers, this.inputState);
     this.layout = new Layout(this.$app, this.list, this.form);
   };
 
@@ -18,42 +18,85 @@ function App() {
     this.init();
   };
 
-  this.setState = (newData, isRendering = true) => {
-    this.data = newData;
-    setStorage(newData);
-    if (isRendering) this.render();
+  this.setTodoState = (newTodo) => {
+    const sortedData = newTodo.sort((a, b) => a.isCompleted - b.isCompleted);
+    setStorage(sortedData);
+    this.todo = sortedData;
+    this.render();
+  };
+
+  this.inputState = {
+    targetValue: null,
+    targetIndex: null,
+    targetComplited: false,
+    set: function (value, index, isCompleted) {
+      this.targetValue = value;
+      this.targetIndex = index;
+      this.targetComplited = isCompleted;
+    },
+    reset: function () {
+      this.targetValue = null;
+      this.targetIndex = null;
+      this.targetComplited = false;
+    },
   };
 
   this.addItem = (newItem) => {
-    const newData = [
-      ...this.data,
+    const newTodo = [
       {
         name: newItem,
         isCompleted: false,
       },
+      ...this.todo,
     ];
-    this.setState(newData);
+    this.setTodoState(newTodo);
   };
 
   this.removeItem = (index) => {
-    const newData = this.data.filter((_, i) => i !== index);
-    this.setState(newData);
+    const newTodo = this.todo.filter((_, i) => i !== index);
+    this.setTodoState(newTodo);
   };
 
-  this.changeItem = (index, option = "") => {
-    let newData = [];
-    if (option === "전체 삭제") newData = [];
-    if (option === "전체 완료") {
-      newData = this.data.map((item) => ({ ...item, isCompleted: true }));
-    }
-    if (!option) {
-      newData = this.data.map((item, idx) => {
-        if (idx !== index) return item;
-        return { ...item, isCompleted: !item.isCompleted };
-      });
-    }
+  this.toggleItem = (el, index) => {
+    el.classList.toggle("is-completed");
+    const newTodo = this.todo.map((item, idx) => {
+      if (idx !== index) return item;
+      return { ...item, isCompleted: !item.isCompleted };
+    });
+    this.setTodoState(newTodo);
+  };
 
-    this.setState(newData, !!option);
+  this.prepareEditItem = (idx, name, isCompleted) => {
+    this.inputState.set(name, idx, isCompleted);
+    this.render();
+  };
+
+  this.editItem = (name, index) => {
+    const newTodo = this.todo.map((item, idx) => {
+      if (idx !== index) return item;
+      return { ...item, name };
+    });
+    this.inputState.reset();
+    this.setTodoState(newTodo);
+  };
+
+  this.completeAllItems = () => {
+    const newTodo = this.todo.map((item) => ({ ...item, isCompleted: true }));
+    this.setTodoState(newTodo);
+  };
+
+  this.removeAllItems = () => {
+    this.setTodoState([]);
+  };
+
+  this.handlers = {
+    addItem: this.addItem,
+    removeItem: this.removeItem,
+    toggleItem: this.toggleItem,
+    prepareEditItem: this.prepareEditItem,
+    editItem: this.editItem,
+    completeAllItems: this.completeAllItems,
+    removeAllItems: this.removeAllItems,
   };
 
   this.init();
