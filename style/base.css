@@ -9,6 +9,7 @@
   --color-primary: #00102e;
   --color-primary-soft: #f4f5fc;
   --color-secondary: #ffd00a;
+  --color-secondary-hard: #f3c200;
   --color-third: #d65050;
   --color-gray: #dfdfdf;
   --size-big: 34px;
@@ -37,12 +38,16 @@ button {
 
 .button-v1 {
   color: var(--color-primary);
-  border: 1px solid var(--color-secondary);
   background: var(--color-secondary);
   border-radius: 0.6em;
   height: var(--size-big);
   width: fit-content;
   padding: 0 0.9em;
+  transition: background var(--transition-duration);
+}
+
+.button-v1:hover {
+  background: var(--color-secondary-hard);
 }
 
 input[type="text"] {

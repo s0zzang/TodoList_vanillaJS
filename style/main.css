@@ -1,7 +1,6 @@
 .todo-main {
   background: #fff;
-  padding: var(--layout-medium);
-  padding-bottom: var(--layout-big);
+  padding: var(--size-medium) var(--layout-medium);
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   overflow-y: auto;
   height: 100%;

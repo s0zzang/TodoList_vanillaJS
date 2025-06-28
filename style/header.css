@@ -1,6 +1,6 @@
 .todo-header {
   background: #fff;
-  padding: var(--layout-big) var(--layout-medium) 0;
+  padding: var(--layout-big) var(--layout-medium) 10px;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   position: relative;
 }
@@ -29,5 +29,5 @@
   border: 1px solid currentColor;
   border-radius: 10px;
   background: var(--color-primary-soft);
-  padding: 4px 10px 3px;
+  padding: 6px 12px;
 }
