@@ -16,7 +16,7 @@ function Item(data, idx, handlers, inputState) {
     if (e.target.checked) prepareEditItem(idx, name, isCompleted);
   });
 
-  const title = createElement("span", "todo-title");
+  const title = createElement("h3", "todo-title");
   title.textContent = name;
 
   const deleteBtn = createElement("button", "delete-btn");
