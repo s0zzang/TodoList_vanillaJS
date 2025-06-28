@@ -28,16 +28,16 @@ function App() {
   this.inputState = {
     targetValue: null,
     targetIndex: null,
-    targetComplited: false,
+    targetcompleted: false,
     set: function (value, index, isCompleted) {
       this.targetValue = value;
       this.targetIndex = index;
-      this.targetComplited = isCompleted;
+      this.targetcompleted = isCompleted;
     },
     reset: function () {
       this.targetValue = null;
       this.targetIndex = null;
-      this.targetComplited = false;
+      this.targetcompleted = false;
     },
   };
 
