@@ -31,8 +31,9 @@ function Item(data, idx, handlers) {
   li.append(input, title, deleteBtn);
   li.addEventListener("click", (e) => {
     const target = e.target.className;
-    if (target === "todo-title") toggleItem(li, idx);
-    if (target === "delete-btn") deleteItem(idx);
+    if (target === "todo-check") return;
+    if (target === "delete-btn") return deleteItem(idx);
+    toggleItem(li, idx);
   });
 
   return li;
