@@ -1,29 +1,34 @@
 import { createElement } from "../utils/createElement.js";
 
-function Item({ name, isCompleted }, idx, removeItem, changeItem) {
+function Item(data, idx, handlers, inputState) {
+  const { name, isCompleted } = data;
+  const { removeItem, toggleItem, prepareEditItem } = handlers;
+  const { targetIndex, targetValue } = inputState;
+
   const li = createElement("li", "todo-item");
   if (isCompleted) li.classList.add("is-completed");
 
-  const input = createElement("input");
-  input.setAttribute("id", name);
+  const input = createElement("input", "todo-check");
+  input.id = idx;
   input.type = "checkbox";
+  input.checked = idx === targetIndex && name === targetValue;
+  input.addEventListener("change", (e) => {
+    if (e.target.checked) prepareEditItem(idx, name, isCompleted);
+  });
 
-  const span = createElement("span", "todo-title");
-  span.textContent = name;
+  const title = createElement("span", "todo-title");
+  title.textContent = name;
 
-  const button = createElement("button", "delete-btn");
+  const deleteBtn = createElement("button", "delete-btn");
   const hiddenText = createElement("span", "hidden");
-  button.type = "button";
+  deleteBtn.type = "button";
   hiddenText.textContent = "삭제";
-  button.append(hiddenText);
+  deleteBtn.append(hiddenText);
 
-  li.append(input, span, button);
+  li.append(input, title, deleteBtn);
   li.addEventListener("click", (e) => {
     const target = e.target.className;
-    if (target === "todo-title") {
-      li.classList.toggle("is-completed");
-      changeItem(idx);
-    }
+    if (target === "todo-title") toggleItem(li, idx);
     if (target === "delete-btn") removeItem(idx);
   });
 
