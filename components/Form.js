@@ -26,7 +26,7 @@ function Form(handlers) {
     const input = e.target.addInput;
     const value = input.value.trim();
     if (!value) return;
-    if (targetValue) editItem(value, targetIndex);
+    if (checked.get.value) editItem(value, checked.get.index);
     else addItem(value);
   });
 
