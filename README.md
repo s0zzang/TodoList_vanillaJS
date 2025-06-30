@@ -1,8 +1,8 @@
 # TodoList - banillaJS
 
-|                                                 미리보기1                                                  |                                                 미리보기2                                                  |
+|                                              할 일 등록, 완료                                              |                                              할 일 수정, 삭제                                              |
 | :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
-| <img width="100%" src="https://github.com/user-attachments/assets/73d4e75b-c6c3-4639-a0ce-8bf677911ec3" /> | <img width="100%" src="https://github.com/user-attachments/assets/8cc54277-2245-4387-aadb-c18e8be9ae08" /> |
+| <img width="100%" src="https://github.com/user-attachments/assets/8cc54277-2245-4387-aadb-c18e8be9ae08" /> | <img width="100%" src="https://github.com/user-attachments/assets/73d4e75b-c6c3-4639-a0ce-8bf677911ec3" /> |
 
 <br />
 
