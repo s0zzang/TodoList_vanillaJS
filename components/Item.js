@@ -4,7 +4,7 @@ function Item(data, idx, handlers) {
   const { name, isCompleted } = data;
   const {
     todos: { deleteItem, toggleItem, prepareEditItem },
-    checked,
+    inputField,
   } = handlers;
 
   const li = createElement("li", "todo-item");
@@ -13,10 +13,10 @@ function Item(data, idx, handlers) {
   const input = createElement("input", "todo-check");
   input.id = idx;
   input.type = "checkbox";
-  input.checked = idx === checked.get.index && name === checked.get.value;
+  input.checked = idx === inputField.get.index && name === inputField.get.value;
   input.addEventListener("change", (e) => {
     if (e.target.checked) prepareEditItem(idx, name, isCompleted);
-    else checked.reset();
+    else inputField.reset();
   });
 
   const title = createElement("h3", "todo-title");

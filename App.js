@@ -18,36 +18,36 @@ function App() {
     this.init();
   };
 
-  this.setTodoState = (newTodo) => {
+  this.setTodo = (newTodo) => {
     const sortedData = newTodo.sort((a, b) => a.isCompleted - b.isCompleted);
     setStorage(sortedData);
     this.todo = sortedData;
     this.render();
   };
 
-  this.checkedState = {
+  this.inputField = {
     value: null,
     index: null,
     completed: false,
   };
 
-  this.checkedSet = (value, index, isCompleted) => {
-    this.checkedState.value = value;
-    this.checkedState.index = index;
-    this.checkedState.completed = isCompleted;
+  this.inputFieldSet = (value, index, isCompleted) => {
+    this.inputField.value = value;
+    this.inputField.index = index;
+    this.inputField.completed = isCompleted;
   };
 
-  this.checkedReset = () => {
-    this.checkedState.value = null;
-    this.checkedState.index = null;
-    this.checkedState.completed = false;
+  this.inputFieldReset = () => {
+    this.inputField.value = null;
+    this.inputField.index = null;
+    this.inputField.completed = false;
     this.render();
   };
 
-  this.checkedHandler = {
-    get: this.checkedState,
-    set: this.checkedSet,
-    reset: this.checkedReset,
+  this.inputFieldHandler = {
+    get: this.inputField,
+    set: this.inputFieldSet,
+    reset: this.inputFieldReset,
   };
 
   this.addItem = (newItem) => {
@@ -58,13 +58,13 @@ function App() {
       },
       ...this.todo,
     ];
-    this.setTodoState(newTodo);
+    this.setTodo(newTodo);
   };
 
   this.deleteItem = (index) => {
     const newTodo = this.todo.filter((_, i) => i !== index);
-    this.checkedReset();
-    this.setTodoState(newTodo);
+    this.inputFieldReset();
+    this.setTodo(newTodo);
   };
 
   this.toggleItem = (el, index) => {
@@ -73,11 +73,11 @@ function App() {
       if (idx !== index) return item;
       return { ...item, isCompleted: !item.isCompleted };
     });
-    setTimeout(() => this.setTodoState(newTodo), 500);
+    setTimeout(() => this.setTodo(newTodo), 500);
   };
 
   this.prepareEditItem = (idx, name, isCompleted) => {
-    this.checkedSet(name, idx, isCompleted);
+    this.inputFieldSet(name, idx, isCompleted);
     this.render();
   };
 
@@ -86,17 +86,17 @@ function App() {
       if (idx !== index) return item;
       return { ...item, name };
     });
-    this.checkedReset();
-    this.setTodoState(newTodo);
+    this.inputFieldReset();
+    this.setTodo(newTodo);
   };
 
   this.completeAllItems = () => {
     const newTodo = this.todo.map((item) => ({ ...item, isCompleted: true }));
-    this.setTodoState(newTodo);
+    this.setTodo(newTodo);
   };
 
   this.deleteAllItems = () => {
-    this.setTodoState([]);
+    this.setTodo([]);
   };
 
   this.todosHandlers = {
@@ -111,7 +111,7 @@ function App() {
 
   this.handlers = {
     todos: this.todosHandlers,
-    checked: this.checkedHandler,
+    inputField: this.inputFieldHandler,
   };
 
   this.init();
